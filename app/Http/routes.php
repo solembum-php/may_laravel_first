@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Task;
 /*
   |--------------------------------------------------------------------------
   | Application Routes
@@ -17,7 +18,9 @@ Route::get('/', function () {
 });
 //all tasks
 Route::get('/tasks', function() {
-    return view('tasks');
+    $tasks = Task::orderBy('created_at','desc')->get();
+    
+    return view('tasks',['tasks' => $tasks]);
 });
 //save task
 Route::post('/tasks', function (Request $request) {
@@ -26,13 +29,17 @@ Route::post('/tasks', function (Request $request) {
     ]);
 
     if ($validator->fails()) {
-	return redirect('/tasks')
+	return redirect(url('tasks'))
 			->withInput()
 			->withErrors($validator);
     }
-    echo 'save';
+    $task = new Task();
+    $task->name = $request->name;
+    $task->save();
+    return redirect(url('tasks'));
 });
 //delete task
-Route::delete('/tasks/{task}', function() {
-    echo 'delete task will be here';
+Route::delete('/tasks/{task}', function(Task $task) {
+    $task->delete();
+    return redirect(url('tasks'));
 });
