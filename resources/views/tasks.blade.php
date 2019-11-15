@@ -5,7 +5,7 @@
     <!-- Отображение ошибок проверки ввода -->
     @include('common.errors')
     <!-- Форма новой задачи -->
-    <form action="{{ url('tasks') }}" method="POST" class="form-horizontal">
+    <form action="{{ route('savetask') }}" method="POST" class="form-horizontal">
 	{{ csrf_field() }}
 	<!-- Имя задачи -->
 	<div class="form-group">
@@ -49,7 +49,14 @@
 		    </td>
 
 		    <td>
-			<form action="{{url('tasks/'.$task->id)}}" method="post">
+			<form action="{{route('edittask',$task->id)}}" method="get">
+			    {{ csrf_field() }}
+			    {{ method_field('EDIT') }}
+			    <button><i class="glyphicon glyphicon-pencil"></i></button>
+			</form>
+		    </td>
+		    <td>
+			<form action="{{route('deletetask',$task->id)}}" method="post">
 			    {{ csrf_field() }}
 			    {{ method_field('DELETE') }}
 			    <button><i class="fa fa-trash"></i></button>

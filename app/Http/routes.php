@@ -21,7 +21,7 @@ Route::get('/tasks', function() {
     $tasks = Task::orderBy('created_at','desc')->get();
     
     return view('tasks',['tasks' => $tasks]);
-});
+})->name('tasklist');
 //save task
 Route::post('/tasks', function (Request $request) {
     $validator = Validator::make($request->all(), [
@@ -29,17 +29,22 @@ Route::post('/tasks', function (Request $request) {
     ]);
 
     if ($validator->fails()) {
-	return redirect(url('tasks'))
+	return redirect(route('tasklist'))
 			->withInput()
 			->withErrors($validator);
     }
     $task = new Task();
     $task->name = $request->name;
     $task->save();
-    return redirect(url('tasks'));
-});
+    return redirect(route('tasklist'));
+})->name('savetask');
 //delete task
 Route::delete('/tasks/{task}', function(Task $task) {
     $task->delete();
-    return redirect(url('tasks'));
-});
+    return redirect(route('tasklist'));
+})->name('deletetask');
+//edit task
+Route::get('/tasks/{task}/edit', function(Task $task){
+    $task->edit();
+    return redirect(route('tasklist'));
+})->name('edittask');
