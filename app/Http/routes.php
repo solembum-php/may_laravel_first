@@ -45,6 +45,6 @@ Route::delete('/tasks/{task}', function(Task $task) {
 })->name('deletetask');
 //edit task
 Route::get('/tasks/{task}/edit', function(Task $task){
-    $task->edit();
-    return redirect(route('tasklist'));
+    $task->create();
+    return view('edittask',['edittask' => $task]);
 })->name('edittask');
