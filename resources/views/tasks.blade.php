@@ -52,14 +52,14 @@
 			<form action="{{route('edittask',$task->id)}}" method="get">
 			    {{ csrf_field() }}
 			    {{ method_field('EDIT') }}
-			    <button><i class="glyphicon glyphicon-pencil"></i></button>
+			    <button><i class="fa fa-edit" style="font-size: 36px;color: lightseagreen"></i></button>
 			</form>
 		    </td>
 		    <td>
 			<form action="{{route('deletetask',$task->id)}}" method="post">
 			    {{ csrf_field() }}
 			    {{ method_field('DELETE') }}
-			    <button><i class="fa fa-trash"></i></button>
+			    <button><i class="fa fa-trash" style="font-size: 36px;color: lightsalmon"></i></button>
 			</form>
 		    </td>
 		</tr>
