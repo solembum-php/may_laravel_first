@@ -11,7 +11,7 @@
         <div class="form-group">
             <label for="task-name" class="col-sm-3 control-label">{{trans('tasks.template.task')}}</label>
             <div class="col-sm-6">
-                <input type="text" name="name" id="task-name" class="form-control" value="{{'$task->name'}}">
+                <input type="text" name="name" id="task-name" class="form-control" value="{{$task->name}}">
             </div>
         </div
         <!-- Кнопка добавления задачи -->
