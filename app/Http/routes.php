@@ -45,7 +45,20 @@ Route::delete('/tasks/{task}', function(Task $task) {
 })->name('deletetask');
 //edit task
 Route::get('/tasks/{task}/edit', function(Task $task){
-    $task->replicate();
-    $task->delete();
-    return view('edittask',['edittask' => $task]);
+    return view('edittask',['task' => $task]);
 })->name('edittask');
+
+Route::put('/tasks/{task}', function(Task $task, Request $request){
+    $validator = Validator::make($request->all(), [
+		'name' => 'required|max:255',
+    ]);
+
+    if ($validator->fails()) {
+	return redirect(route('tasklist'))
+			->withInput()
+			->withErrors($validator);
+    }
+    $task->name = $request->name;
+    $task->update();
+    return redirect(route('tasklist'));
+})->name('tasks.update');

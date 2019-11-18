@@ -49,7 +49,7 @@
                     </td>
 
                     <td>
-                        <form action="{{route('edittask',$task->id,$task->name)}}" method="get">
+                        <form action="{{route('edittask',$task->id)}}" method="get">
                             {{ csrf_field() }}
                             {{ method_field('GET') }}
                             <button><i class="fa fa-edit" style="font-size: 36px;color: lightseagreen"></i></button>

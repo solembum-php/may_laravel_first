@@ -5,8 +5,9 @@
     <!-- Отображение ошибок проверки ввода -->
     @include('common.errors')
     <!-- Форма новой задачи -->
-    <form action="{{ route('savetask') }}" method="POST" class="form-horizontal">
+    <form action="{{ route('tasks.update',$task->id) }}" method="POST" class="form-horizontal">
         {{ csrf_field() }}
+	{{ method_field('PUT') }}
         <!-- Имя задачи -->
         <div class="form-group">
             <label for="task-name" class="col-sm-3 control-label">{{trans('tasks.template.task')}}</label>
@@ -24,4 +25,4 @@
         </div>
     </form>
 </div>
-
+@endsection
